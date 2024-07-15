@@ -123,6 +123,7 @@ def get_playlist(token, uri):
                 playlist = spotify.next(next) 
         
     logging.debug("Playlist estratta: " + str(songs))
+    return songs
     
 # def get_song():
 
@@ -135,19 +136,19 @@ def refresh_token(token):
 def playlist_to_list(playlist):
     songs = []
     for song in playlist:
-        song_name = song["track"]["name"]
+        song_name = song["track"]["name"].replace('“', "'").replace('"', "'")
         artist = song["track"]["artists"][0]["name"]
-        logging.debug((song_name, artist))
-        songs.append((song_name, artist))
+        logging.debug([song_name, artist])
+        songs.append([song_name, artist])
     
     return songs
 
 def album_to_list(album):
     songs = []
     for song in album:
-        song_name = song["name"]
+        song_name = song["name"].replace('“', "'").replace('"', "'")
         artist = song["artists"][0]["name"]
-        logging.debug((song_name, artist))
-        songs.append((song_name, artist))
+        logging.debug([song_name, artist])
+        songs.append([song_name, artist])
     
     return songs

@@ -19,6 +19,7 @@ from utility import is_null
 #* Import other library
 import time
 import logging
+import json
 logging.basicConfig(filename='file.log', filemode='w', format='%(name)s - %(levelname)s - %(message)s', level=logging.DEBUG)
 
 page_name = ""
@@ -38,16 +39,6 @@ def home():
     
     return render_template("home.html", logon="false") 
 
-@app.route("/guessthelyrics/login")
-def gtl_login():
-    """Inizialize the authentication for spotify API
-
-    Returns:
-        redirect(auth_url): Redirect to an external page for the spotify's login
-    """
-
-    return redirect(url_for("gtl_playing"))
-
 @app.route("/guessthelyrics/playing", methods=['GET', 'POST'])
 def guessthelyrics_playing():
     """Inizialize the authentication for spotify API
@@ -65,9 +56,10 @@ def guessthelyrics_playing():
     if (token == "login"):
         return redirect(url_for(token))
         
-    playlist = spotify.get_playlist(token, uri)
+    songs = spotify.get_playlist(token, uri)
+    songs_json = json.dumps(songs)
     
-    return render_template("guessthelyrics_playing.html")
+    return render_template("guessthelyrics_playing.html", songs = songs_json)
 
 @app.route("/<page>")
 def render_game(page):
