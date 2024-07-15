@@ -1,0 +1,16 @@
+# Esecuzione in locale
+__pycache__/
+
+# Cartelle
+lib/
+lib64/
+lib64
+bin/
+include/
+node_modules/
+
+# log
+*.log
+
+#test
+test*
