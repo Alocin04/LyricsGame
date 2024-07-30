@@ -1,20 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <script src="../genius.js" type="text/javascript"></script>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Guess the lyrics</title>
+        <script type="importmap">
+            {
+                "imports": {
+                    "genius-lyrics": "/node_modules/genius-lyrics/dist/client.js"
+                    "dotenv": "/node_modules/dotenv/config.js"
+                }
+            }
+        </script>
         <script>
             const regex_unicode = /&#(\d+);/g;
             let tmp_songs = "{{ songs }}".replace(regex_unicode, function(_, $1) {
                 return String.fromCharCode($1);
             }); 
-            // tmp_songs = JSON.stringify(tmp_songs);
             console.log(tmp_songs);
-            const songs = JSON.parse(tmp_songs)
-            console.log(songs)
+            songs = JSON.parse(tmp_songs);
+            console.log(songs);
         </script>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Guess the lyrics</title>
+        <script type="module" src="{{url_for('static', filename='genius.js')}}" type="text/javascript"></script>
     </head>
 
     <body>

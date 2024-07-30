@@ -1,0 +1,5 @@
+{
+    "imports": {
+        "genius-lyrics": "/node_modules/genius-lyrics/dist/client.js"
+    }
+}
